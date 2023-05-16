@@ -7,7 +7,7 @@ throttle = 0.0
 
 def throttle_callback(data):
     global throttle
-    throttle = -(data.data/255-0.5)*0.3
+    throttle = (data.data/255)*0.3
 
 serial_port = '/dev/serial/by-id/usb-STMicroelectronics_ChibiOS_RT_Virtual_COM_Port_304-if00'
 

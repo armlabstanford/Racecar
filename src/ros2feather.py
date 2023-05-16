@@ -14,7 +14,7 @@ steer_angle = 85.0
 
 # Open the serial port.
 port = '/dev/serial/by-id/usb-Adafruit_Industries_LLC_Feather_M4_CAN_903C8AA83247395320202037383611FF-if00'
-ser = serial.Serial(port, 115200, timeout=0.1)
+ser = serial.Serial(port, 115200, timeout=0.01)
 print('Connected')
 time.sleep(2)
 

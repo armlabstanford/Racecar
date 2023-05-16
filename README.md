@@ -28,6 +28,22 @@
     ~~~bash
     sudo apt install ros-noetic-ddynamic-reconfigure
     ~~~
+- for realsense-ros, add
+    ~~~c++
+    1. find_package( OpenCV REQUIRED )
+    2. include_directories(
+    include
+    ${realsense2_INCLUDE_DIR}
+    ${catkin_INCLUDE_DIRS}
+    ${OpenCV_INCLUDE_DIRS}
+    )
+    3. target_link_libraries(${PROJECT_NAME}
+    ${realsense2_LIBRARY}
+    ${catkin_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${OpenCV_LIBRARIES}
+    )
+    ~~~
 
 ## [Setting up mamba env]
 - Install mamba

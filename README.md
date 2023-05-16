@@ -22,6 +22,17 @@
     git config --global credential.helper cache
     ~~~
 
+## [Setting up ssh keyless remote access]
+- See if you already have a ssh key generated:
+    ~~~bash
+    ls -al ~/.ssh/id_*.pub
+    ~~~
+- If not, generate a key pair:
+    ~~~bash
+    ssh-keygen -t rsa -b 4096 -C ""
+    ~~~
+- Throw your id_rsa.pub content into racecar home/.ssh/authorized_keys
+
 ## [Setting up ROS Noetic]
 - [Refer to this ROS official guide](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Also need ddynamic reconfig

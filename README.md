@@ -110,3 +110,9 @@
     cmake ../ -DBUILD_PYTHON_BINDINGS:bool=true
     sudo make uninstall && sudo make clean && sudo make -j6 && sudo make install
     ~~~
+
+## [TODOs]
+- Add launch script
+- Add telemetry publishers
+- Add additional driving camera
+- Add current sensing

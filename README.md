@@ -116,3 +116,13 @@
 - Add telemetry publishers
 - Add additional driving camera
 - Add current sensing
+
+## [Setting up video stream]
+- On source pc (jetson) You may replace host= with whatever target ip you want to send to
+    ~~~bash
+    gst-launch-1.0 v4l2src device=/dev/video4 ! 'video/x-raw,width=960,height=540,framerate=60/1' ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune=zerolatency option-string="sps-id=0" ! rtph264pay ! udpsink host=KWA20.local port=5000 sync=false -e
+    ~~~
+- On target pc (your laptop)
+    ~~~bash
+    gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
+    ~~~

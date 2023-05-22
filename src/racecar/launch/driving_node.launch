@@ -3,9 +3,15 @@
     <!-- <include file="$(find realsense2_camera)/launch/rs_d435i.launch"/> -->
     
     <!--Start foxglove bridge-->
-    <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
+    <!-- <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
         <arg name="port" value="8765" />
+    </include> -->
+
+    <launch>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" > 
+        <arg name="port" value="8080"/>
     </include>
+    </launch>
 
     <!--Start to listen to throttle and steer commands-->
     <node pkg="racecar" type="ros2feather.py" name="FeatherSerial" output="screen" />

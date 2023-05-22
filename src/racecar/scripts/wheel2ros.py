@@ -1,3 +1,4 @@
+#!/home/weizhuo2/anaconda3/envs/racecar/bin/python
 import rospy
 from std_msgs.msg import Float32
 import asyncio
@@ -68,6 +69,7 @@ async def publish_to_ros():
 
         spub.publish(Float32(float(clamp(0,steer,255))))
         tpub.publish(Float32(float(clamp(-255,throttle,255))))
+        print('pub')
         await asyncio.sleep(0.02)
 
 # Event loop for asynchronous reading of input events

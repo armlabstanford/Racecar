@@ -8,7 +8,7 @@
     </include>
 
     <!--Start to listen to throttle and steer commands-->
-    <node pkg="Racecar" type="ros2feather.py" name="FeatherSerial" output="screen" />
-    <node pkg="Racecar" type="ros2vesc.py" name="VESCSerial" output="screen" />
+    <node pkg="racecar" type="ros2feather.py" name="FeatherSerial" output="screen" />
+    <node pkg="racecar" type="ros2vesc.py" name="VESCSerial" output="screen" />
     
 </launch>

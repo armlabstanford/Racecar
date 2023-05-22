@@ -4,6 +4,6 @@
     <env name="ROS_IP" value="KWA20.local" />
 
     <!--Start teleop publisher-->
-    <node pkg="Racecar" type="wheel2ros.py" name="G29_controller" output="screen" />
+    <node pkg="racecar" type="wheel2ros.py" name="G29_controller" output="screen" />
 
 </launch>

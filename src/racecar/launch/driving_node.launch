@@ -1,6 +1,6 @@
 <launch>
     <!--Start camera feed-->
-    <include file="$(find realsense2_camera)/launch/rs_d435i.launch"/>
+    <!-- <include file="$(find realsense2_camera)/launch/rs_d435i.launch"/> -->
     
     <!--Start foxglove bridge-->
     <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
@@ -8,7 +8,7 @@
     </include>
 
     <!--Start to listen to throttle and steer commands-->
-    <node pkg="Racecar" type="ros2feather.py" name="FeatherSerial" output="screen" />
-    <node pkg="Racecar" type="ros2vesc.py" name="VESCSerial" output="screen" />
+    <node pkg="racecar" type="ros2feather.py" name="FeatherSerial" output="screen" />
+    <node pkg="racecar" type="ros2vesc.py" name="VESCSerial" output="screen" />
     
 </launch>

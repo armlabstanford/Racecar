@@ -14,13 +14,13 @@ rospy.Subscriber("steer", Float32, steer_callback)
 steer_angle = 85.0
 
 # Open the serial port.
-port = '/dev/serial/by-id/usb-Adafruit_Industries_LLC_Feather_M4_CAN_903C8AA83247395320202037383611FF-if00'
+port = '/dev/serial/by-id/usb-Adafruit_Feather_M4_CAN_A88A3C905339473237202020FF113638-if00'
 ser = serial.Serial(port, 115200, timeout=0.01)
 print('Connected')
 time.sleep(2)
 
 # Write a command to the Feather board.
-ser.write(b"90\r")
+ser.write(b"90\n")
 t2 = time.time()
 # ser.flush()
 print('Sent command:')
@@ -38,7 +38,7 @@ while True:
             # print(time.time()-t2)
             # print('dd',time.time()-t1)
     
-    cmd = (str(int(steer_angle))+"\r").encode()
+    cmd = (str(int(steer_angle))+"\n").encode()
     print(cmd)
     ser.write(cmd)
     ser.flush()

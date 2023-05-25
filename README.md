@@ -67,7 +67,7 @@
     ~~~bash
     mamba create -n racecar python=3.9
     mamba activate racecar
-    pip install pythoncrc numpy evdev
+    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo
     ~~~
 - Don't forget to go to pyvesc to disable the get firmware line.
 

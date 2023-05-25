@@ -46,9 +46,9 @@ void loop() {
     previousMillis = currentMillis;
   }
 
-  // // In case of connection loss
-  // if (currentMillis - previousMillis > 500) {
-  //   uint16_t pulselen = map(85, 0, 180, SERVOMIN, SERVOMAX);
-  //   pca.setPWM(4, 0, pulselen);
-  // }
+  // In case of connection loss
+  if (currentMillis - previousMillis > 500) {
+    uint16_t pulselen = map(85, 0, 180, SERVOMIN, SERVOMAX);
+    pca.setPWM(4, 0, pulselen);
+  }
 }

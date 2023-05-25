@@ -22,7 +22,7 @@ print(device.capabilities())
 
 if ecodes.EV_FF in device.capabilities():
     # Set the autocentering strength
-    autocenter_strength = 0x5000  # Set this to the desired strength (0x0000 to 0xFFFF)
+    autocenter_strength = 0x4000  # Set this to the desired strength (0x0000 to 0xFFFF)
     device.write(ecodes.EV_FF, ecodes.FF_AUTOCENTER, autocenter_strength)
     print('Autocentering strength set!')
 

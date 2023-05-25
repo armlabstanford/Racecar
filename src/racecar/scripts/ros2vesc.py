@@ -17,7 +17,13 @@ vesc = VESC(serial_port)
 rospy.init_node('VESCSerial', anonymous=True)
 rospy.Subscriber("throttle", Float32, throttle_callback)
 
+count = 0
 while True:
     print(throttle)
-    vesc.set_duty_cycle(throttle*0.5)
+    vesc.set_rpm(throttle*30)
     time.sleep(0.02)
+    count += 1
+
+    if count%50 == 0:
+        status = vesc.get_measurements()
+        print(status)

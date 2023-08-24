@@ -22,6 +22,13 @@
     git config --global credential.helper cache
     ~~~
 
+## [Setting up telemetry]
+- install pip3 and jtop
+    ~~~bash
+    sudo apt install python3-pip
+    sudo pip3 install -U jetson-top
+    ~~~
+
 ## [Setting up ssh keyless remote access]
 - See if you already have a ssh key generated:
     ~~~bash
@@ -120,9 +127,9 @@
 ## [Setting up video stream]
 - On source pc (jetson) You may replace host= with whatever target ip you want to send to
     ~~~bash
-    gst-launch-1.0 v4l2src device=/dev/video4 ! 'video/x-raw,width=960,height=540,framerate=60/1' ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune=zerolatency option-string="sps-id=0" ! rtph264pay ! udpsink host=KWA20.local port=5000 sync=false -e
+    gst-launch-1.0 v4l2src device=/dev/video4 ! 'video/x-raw,width=960,height=540,framerate=60/1' ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune=zerolatency option-string="sps-id=0" ! rtph264pay ! udpsink host=KWA20.local port=5003 sync=false -e
     ~~~
-- On target pc (your laptop)
+- Wait 30s, and go to target pc (your laptop)
     ~~~bash
-    gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
+    gst-launch-1.0 -v udpsrc port=5003 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
     ~~~

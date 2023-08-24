@@ -67,7 +67,7 @@
     ~~~bash
     mamba create -n racecar python=3.9
     mamba activate racecar
-    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo
+    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml
     ~~~
 - Don't forget to go to pyvesc to disable the get firmware line.
 
@@ -89,7 +89,7 @@
     cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local  -D INSTALL_C_EXAMPLES=ON  -D INSTALL_PYTHON_EXAMPLES=ON  -D OPENCV_GENERATE_PKGCONFIG=ON  -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-3.4.16/modules -D BUILD_EXAMPLES=ON ../opencv-3.4.16
     make -j6
     ~~~
-- Now go to the cmakelist.txt of Racecar/ change opencv_dir to your build path. E.g:
+- Now go to the cmakelist.txt of racecar/ change OpenCV_DIR to your build path. E.g:
     ~~~bash
     set(OpenCV_DIR /home/racecar/Documents/opencv/build)
     ~~~

@@ -138,7 +138,7 @@
     ~~~
 - Wait 30s, and go to target pc (your laptop)
     ~~~bash
-    gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
+    gst-launch-1.0 -v udpsrc port=5003 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
     ~~~
 
 - performance: 

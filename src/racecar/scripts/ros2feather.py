@@ -1,4 +1,4 @@
-#!/home/racecar/mambaforge-pypy3/envs/racecar/bin/python3
+#!/home/racecar/mambaforge/envs/racecar/bin/python3
 import serial
 import time
 import rospy
@@ -43,9 +43,9 @@ print('Sent command:')
 while loop_running:
     try:
         t1 = time.time()
-        print('\n[============]')
+        # print('\n[============]')
         response = ser.readline().decode()
-        print("RS:",response)
+        # print("RS:",response)
         while ser.in_waiting:
             response = ser.readline().decode()
             if response[0] == "R":
@@ -54,10 +54,10 @@ while loop_running:
                 # print('dd',time.time()-t1)
         
         cmd = (str(int(steer_angle))+"\n").encode()
-        print(cmd)
+        # print(cmd)
         ser.write(cmd)
         ser.flush()
-        print('Done Writing')
+        # print('Done Writing')
 
         # t2 = time.time()
         # time.sleep(max(0,1/HZ-(t2-t1)-0.00006))

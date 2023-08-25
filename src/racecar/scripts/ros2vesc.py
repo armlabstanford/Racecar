@@ -1,4 +1,4 @@
-#!/home/racecar/mambaforge-pypy3/envs/racecar/bin/python3
+#!/home/racecar/mambaforge/envs/racecar/bin/python3
 import serial,time
 from pyvesc import VESC
 import rospy
@@ -57,6 +57,8 @@ duty_pub  = rospy.Publisher('Duty_cycle', Float32, queue_size=1)
 tach_pub  = rospy.Publisher('Tach', Float32, queue_size=1)
 power_pub = rospy.Publisher('P_motor', Float32, queue_size=1)
 batt_pub  = rospy.Publisher('Batt', Float32, queue_size=1)
+speed_pub = rospy.Publisher('Wheel_Speed', Float32, queue_size=1)
+
 # averages
 vin_lst = []
 
@@ -64,7 +66,7 @@ count = 0
 while loop_running:
     try:
         if not (throttle is None):
-            print("Throttle ",throttle)
+            # print("Throttle ",throttle)
             if throttle < 0.05:
                 vesc.set_current(0.0)
             else:
@@ -85,6 +87,8 @@ while loop_running:
                 duty_pub.publish(status.duty_cycle_now)
                 tach_pub.publish(status.tachometer)
                 power_pub.publish(status.avg_input_current*status.v_in)
+                speed = status.rpm/60/10 * 0.067 * 3.1415927
+                speed_pub.publish(speed)
 
                 # manage lists
                 if len(vin_lst) > 400:
@@ -92,7 +96,8 @@ while loop_running:
                 
                 # print("Duty:",status.duty_cycle_now)
             else:
-                print('Status is none')
+                # print('Status is none')
+                pass
 
         count += 1
         rate.sleep()

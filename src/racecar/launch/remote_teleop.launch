@@ -1,6 +1,6 @@
 <launch>
     <!--Setup remote roscore location and local IP-->
-    <env name="ROS_MASTER_URI" value="http://Racecar-Armlab.local:11311" />
+    <env name="ROS_MASTER_URI" value="http://racecar-armlab.local:11311" />
     <env name="ROS_IP" value="KWA20.local" />
 
     <!--Start teleop publisher-->

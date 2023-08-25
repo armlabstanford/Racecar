@@ -74,7 +74,7 @@
     ~~~bash
     mamba create -n racecar python=3.9
     mamba activate racecar
-    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml rospkg Pillow
+    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml rospkg Pillow defusedxml
     pip install git+https://github.com/LiamBindle/PyVESC
     pip uninstall PyCRC
     pip install pythoncrc
@@ -140,3 +140,9 @@
     ~~~bash
     gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
     ~~~
+
+- performance: 
+    - rosbridge, uncompressed: 600ms
+    - rosbridge, compressed: 160ms
+    - gst: 70ms (only 1 viewer restriction applies, although you can relay it to ros)
+    - local 30fps: 33ms

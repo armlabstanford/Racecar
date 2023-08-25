@@ -41,7 +41,10 @@ throttle = 0.0
 
 def throttle_callback(data):
     global throttle
+    global rpm
     throttle = (data.data/255)*0.3
+    if abs(rpm) < 1500:
+        throttle = np.sign(throttle)* min(2500/20000, abs(throttle))
 
 serial_port = '/dev/serial/by-id/usb-STMicroelectronics_ChibiOS_RT_Virtual_COM_Port_304-if00'
 
@@ -63,20 +66,25 @@ speed_pub = rospy.Publisher('Wheel_Speed', Float32, queue_size=1)
 vin_lst = []
 
 count = 0
+rpm = 0
 while loop_running:
     try:
         if not (throttle is None):
             # print("Throttle ",throttle)
-            if throttle < 0.05:
+            if abs(throttle) < 0.04:
                 vesc.set_current(0.0)
             else:
-                vesc.set_rpm(int(throttle*10000)) # minimum is 588erpm, 9.8rps
+                if throttle < 0:
+                    vesc.set_rpm(int(throttle*7000))
+                else:
+                    vesc.set_rpm(int(throttle*15000)) # minimum is 588erpm, 9.8rps
 
         if count%1 == 0:
             status = vesc.get_measurements()
             if status is not None:
                 # update values
                 vin_lst.append(status.v_in)
+                rpm = status.rpm
 
                 batt_percent = lipo_volt2percent(np.mean(vin_lst))
 

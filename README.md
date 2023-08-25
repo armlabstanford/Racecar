@@ -22,13 +22,6 @@
     git config --global credential.helper cache
     ~~~
 
-## [Setting up telemetry]
-- install pip3 and jtop
-    ~~~bash
-    sudo apt install python3-pip
-    sudo pip3 install -U jetson-top
-    ~~~
-
 ## [Setting up ssh keyless remote access]
 - See if you already have a ssh key generated:
     ~~~bash
@@ -63,6 +56,13 @@
     )
     ~~~
 
+## [Setting up telemetry]
+- install pip3 and jtop
+    ~~~bash
+    sudo apt install python3-pip ros-noetic-rosbridge-server
+    sudo pip3 install -U jetson-top
+    ~~~
+    
 ## [Setting up mamba env]
 - Install mamba
     ~~~bash
@@ -74,9 +74,16 @@
     ~~~bash
     mamba create -n racecar python=3.9
     mamba activate racecar
-    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml
+    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml rospkg Pillow
+    pip install git+https://github.com/LiamBindle/PyVESC
+    pip uninstall PyCRC
+    pip install pythoncrc
     ~~~
-- Don't forget to go to pyvesc to disable the get firmware line.
+- Don't forget to go to pyvesc to comment the get firmware line and unindent the next line.
+- Also need to add your user to the dialout group
+    ~~~bash
+    sudo usermod -a -G dialout $USER
+    ~~~
 
 ## [Setting up OpenCV]
 - Download opencv-3.16 opencv-contrib-3.16 from github
@@ -107,7 +114,7 @@
     ~~~bash
     sudo apt-get update && sudo apt-get -y upgrade
     sudo apt-get install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
-    cd ~/Downloads
+    cd ~/Documents
     git clone https://github.com/IntelRealSense/librealsense.git
     cd ./librealsense
     # Remove all realsense cameras before run
@@ -131,5 +138,5 @@
     ~~~
 - Wait 30s, and go to target pc (your laptop)
     ~~~bash
-    gst-launch-1.0 -v udpsrc port=5003 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
+    gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink
     ~~~

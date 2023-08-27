@@ -4,7 +4,7 @@ from std_msgs.msg import Float32
 import asyncio
 from evdev import InputDevice, categorize, ecodes, ff
 
-joy_states = {'steer': 127.0, 'throttle': 0.0, 'brake': 0.0}
+joy_states = {'steer': 128.0, 'throttle': 0.0, 'brake': 0.0}
 
 # Create a ROS publisher
 spub = rospy.Publisher('steer', Float32, queue_size=1)

@@ -136,6 +136,10 @@
     ~~~bash
     gst-launch-1.0 v4l2src device=/dev/video4 ! 'video/x-raw,width=960,height=540,framerate=60/1' ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune=zerolatency option-string="sps-id=0" ! rtph264pay ! udpsink host=KWA20.local port=5003 sync=false -e
     ~~~
+    gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg,width=1280,height=720,framerate=30/1' ! jpegdec ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune="zerolatency" option-string="sps-id=0" ! rtph264pay ! udpsink host=Kens-MacBook-Pro-2.local port=5003 sync=false -e
+
+    gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg,width=1280,height=720,framerate=30/1' ! jpegdec ! videoconvert ! 'video/x-raw,format=I420' ! x264enc speed-preset="ultrafast" tune="zerolatency" option-string="sps-id=0" ! rtph264pay ! udpsink host=KWA20.local port=5003 sync=false -e
+
 - Wait 30s, and go to target pc (your laptop)
     ~~~bash
     gst-launch-1.0 -v udpsrc port=5003 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink

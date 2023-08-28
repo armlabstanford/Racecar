@@ -75,7 +75,7 @@
     mamba create -n racecar python=3.9
     mamba activate racecar
     mamba install scipy
-    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml rospkg Pillow defusedxml
+    pip install pythoncrc numpy evdev pyOpenSSL twisted autobahn service-identity tornado pymongo empy catkin_pkg pyyaml rospkg Pillow defusedxml pycryptodomex gnupg tqdm
     pip install git+https://github.com/LiamBindle/PyVESC
     pip uninstall PyCRC
     pip install pythoncrc

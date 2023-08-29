@@ -8,7 +8,7 @@
     </include> -->
 
     <!-- VRPN Server -->
-   <arg name="server" default="192.168.0.223"/>
+   <arg name="server" default="DESKTOP-EBBQFA6.local"/>
    <!-- <arg name="server" default="mocap.local"/> -->
 
    <node pkg="vrpn_client_ros" type="vrpn_client_node" name="vrpn_client_node" output="screen">

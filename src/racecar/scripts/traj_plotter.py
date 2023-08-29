@@ -12,7 +12,7 @@ traj_name = 'star500.txt'
 # traj_name = 'circle.txt'
 with open(folder_path+traj_name, 'rb') as f:
     traj = np.loadtxt(f, delimiter=' ')
-    traj = traj[:,1:]*1.5 + np.array([-0.3,-0.5])
+    traj = traj[:,1:]*1.5 + np.array([-0.0,-0.5])
 
 def quat_to_heading(current_quat):
     current_orient = R.from_quat(current_quat)        
@@ -93,7 +93,8 @@ def plot_trajectory():
         plt.clf()  # Clear the previous plot
         plt.plot(-traj[:,0],traj[:,1],'r')
         plt.plot(pose_array[:, 0], pose_array[:, 1], 'b-')
-        plt.arrow(pose_array[-1, 0], pose_array[-1, 1], heading_vect[0]*0.3, heading_vect[1]*0.3)
+        current_tail_pos = pose_list[-1] - heading_vect*0.275
+        plt.arrow(current_tail_pos[0], current_tail_pos[1], heading_vect[0]*0.275, heading_vect[1]*0.275, width=0.1, head_width=0.2, head_length=0.1)
         # control()
         plt.axis('equal')
         plt.xlim((-2,2))

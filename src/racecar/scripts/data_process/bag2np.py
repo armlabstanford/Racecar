@@ -8,8 +8,10 @@ import numpy as np
 import pickle
 
 class bag_converter:
-    def __init__(self, fpath):
+    def __init__(self, fpath, cut=0.0):
+        print('Cutting away last:', cut, 'secs')
         self.fpath      = fpath
+        self.cut        = cut
         self.bag        = rosbag.Bag(self.fpath)
         self.info_dict  = yaml.safe_load(self.bag._get_yaml_info())
         self.data_array = []
@@ -67,7 +69,7 @@ class bag_converter:
         t_ed = self.data_array[-1,0]
         print("duration:",t_ed-t_st)
         resampled_data = []
-        for t in tqdm(np.arange(t_st, t_ed, 1/hz)):
+        for t in tqdm(np.arange(t_st, t_ed-self.cut, 1/hz)):
             array_idx = np.argmin(abs(self.data_array[:,0]-t))
             resampled_data.append(self.data_array[array_idx])
 
@@ -95,10 +97,12 @@ class bag_converter:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--fpath',      type=str,   default='??')
+    parser.add_argument('--cut', type=float, default=0)
     args = parser.parse_args()
     fpath   = args.fpath
+    cut = args.cut
 
-    converter = bag_converter(fpath)
+    converter = bag_converter(fpath, cut)
     converter.read_msg()
     print(converter.data_array.shape)
     converter.resample(hz=20)

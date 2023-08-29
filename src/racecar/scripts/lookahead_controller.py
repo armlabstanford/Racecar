@@ -14,11 +14,12 @@ class LookAheadController:
         self.throttle_pub = rospy.Publisher('throttle', Float32, queue_size=1)
 
         folder_path = '/home/racecar/Documents/racecar_ws/src/Racecar/src/racecar/scripts/trajs/'
+        # traj_name = 'square500.txt'
         traj_name = 'star500.txt'
         # traj_name = 'circle.txt'
         with open(folder_path+traj_name, 'rb') as f:
             raw_points = np.loadtxt(f, delimiter=' ')
-            traj_points = raw_points[:,1:]*scale + np.array([-0.3,-0.5])
+            traj_points = raw_points[:,1:]*scale + np.array([-0.0,-0.5])
         self.traj_points = np.array(traj_points)
         
         self.lookahead_distance = lookahead_distance
@@ -91,7 +92,7 @@ class LookAheadController:
             self.steer_pub.publish(steer_command)
 
         # Lap counter
-        dist = np.linalg.norm(np.array(current_tail_pos)-self.traj_points[0,0:2])
+        dist = np.linalg.norm(np.array(self.current_pos)-self.traj_points[0,0:2])
         curr_t = time.time()
         if (dist < 0.1) and (curr_t - self.last_t > 2):
             self.lap = self.lap+1
@@ -101,10 +102,14 @@ class LookAheadController:
     def shutdown_hook(self):
         print("Shutting down... Setting throttle and steer to zero.")
         self.kill = True
-        t_stop = int(self.throttle/60*5)
+        t_stop = int(self.throttle/60*6)
         for i in range(t_stop):
-            self.throttle_pub.publish(-200)
+            self.throttle_pub.publish(-250)
+            self.throttle_pub.publish(-250)
+            self.throttle_pub.publish(-250)
             time.sleep(0.1)
+            self.throttle_pub.publish(-250)
+            self.throttle_pub.publish(-250)
         self.throttle_pub.publish(0)
         self.steer_pub.publish(127)
         time.sleep(0.1)
@@ -118,8 +123,9 @@ if __name__ == '__main__':
         # Sample trajectory points
         # traj_points = [(-1, -1), (1, -1), (1, 1), (-1, 1)]
 
-        lookahead_distance = 0.45
-        controller = LookAheadController(lookahead_distance, scale=1.5, throttle=180)
+        lookahead_distance = 0.43
+        # lookahead_distance = 0.7
+        controller = LookAheadController(lookahead_distance, scale=1.5, throttle=60)
         rospy.on_shutdown(controller.shutdown_hook)
         rospy.spin()
     except rospy.ROSInterruptException:

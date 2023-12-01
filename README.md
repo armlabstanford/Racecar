@@ -55,6 +55,10 @@
     ${OpenCV_LIBRARIES}
     )
     ~~~
+- You might need to add this line if catkin doesn't find the realsense package
+  ~~~c++
+  set(realsense2_DIR /usr/lib/x86_64-linux-gnu/cmake/realsense2)
+  ~~~
 
 ## [Setting up telemetry]
 - install pip3 and jtop

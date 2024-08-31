@@ -8,8 +8,12 @@ from scipy.spatial.transform import Rotation as R
 # Global variable to store the last 100 poses
 pose_list = []
 folder_path = '/home/racecar/Documents/racecar_ws/src/Racecar/src/racecar/scripts/trajs/'
-traj_name = 'star500.txt'
+# traj_name = 'star500.txt'
 # traj_name = 'circle.txt'
+# traj_name = 'kinsmen500.txt'
+# traj_name = 'buttonwillow1000.txt'
+# traj_name = 'lagunaseca1000.txt'
+traj_name = 'validation1000.txt'
 with open(folder_path+traj_name, 'rb') as f:
     traj = np.loadtxt(f, delimiter=' ')
     traj = traj[:,1:]*1.5 + np.array([-0.0,-0.5])

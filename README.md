@@ -155,3 +155,13 @@
     - rosbridge, compressed: 160ms
     - gst: 70ms (only 1 viewer restriction applies, although you can relay it to ros)
     - local 30fps: 33ms
+
+
+
+- useful tools:
+~~~bash
+ffplay /dev/video0
+v4l2-ctl --device=/dev/video0 --all
+~~~
+
+On macos the gst-launch is at: /Library/Frameworks/GStreamer.framework/Commands/gst-launch-1.0

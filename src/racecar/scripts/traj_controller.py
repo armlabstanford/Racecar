@@ -38,10 +38,13 @@ class PDController:
 
         # Define line segments for the trajectory
         folder_path = '/home/racecar/Documents/racecar_ws/src/Racecar/src/racecar/scripts/'
-        traj_name = 'star50.txt'
+        # traj_name = 'star50.txt'
+        # traj_name = 'circle.txt'
+        traj_name = 'lagunaseca1000.txt'
+        traj_name = 'kinsmen500.txt'
         with open(folder_path+traj_name, 'rb') as f:
             self.raw_points = np.loadtxt(f, delimiter=' ')
-            self.raw_points = self.raw_points[:,1:]*scale + np.array([0,-0.5])
+            self.raw_points = self.raw_points[:,1:]*scale + np.array([-0.3,-0.5])
         self.traj2linesegs()
 
         # self.line_segments = [((-1, -1), (-0.9, -1)), 
@@ -173,7 +176,7 @@ class PDController:
 
 if __name__ == '__main__':
     try:
-        controller = PDController(Kp=500, Kd=0, scale=1.5, speed=60, direction="CCW")
+        controller = PDController(Kp=500, Kd=50, scale=0.4, speed=200, direction="CCW")
         rospy.on_shutdown(controller.shutdown_hook)
         rospy.spin()
     except rospy.ROSInterruptException:

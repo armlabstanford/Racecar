@@ -15,8 +15,12 @@ class LookAheadController:
 
         folder_path = '/home/racecar/Documents/racecar_ws/src/Racecar/src/racecar/scripts/trajs/'
         # traj_name = 'square500.txt'
-        traj_name = 'star500.txt'
+        # traj_name = 'star500.txt'
         # traj_name = 'circle.txt'
+        # traj_name = 'kinsmen500.txt'
+        # traj_name = 'lagunaseca1000.txt'
+        # traj_name = 'buttonwillow1000.txt'
+        traj_name = 'validation1000.txt'
         with open(folder_path+traj_name, 'rb') as f:
             raw_points = np.loadtxt(f, delimiter=' ')
             traj_points = raw_points[:,1:]*scale + np.array([-0.0,-0.5])
@@ -87,6 +91,7 @@ class LookAheadController:
 
         # Publish the steering angle
         steer_command = int(np.rad2deg(steer_angle)/25*128+127)
+        steer_command = min(max(steer_command,0),255)
         if not self.kill:
             self.throttle_pub.publish(self.throttle)
             self.steer_pub.publish(steer_command)
@@ -103,6 +108,7 @@ class LookAheadController:
         print("Shutting down... Setting throttle and steer to zero.")
         self.kill = True
         t_stop = int(self.throttle/60*6)
+        self.steer_pub.publish(127)
         for i in range(t_stop):
             self.throttle_pub.publish(-250)
             self.throttle_pub.publish(-250)
@@ -111,7 +117,7 @@ class LookAheadController:
             self.throttle_pub.publish(-250)
             self.throttle_pub.publish(-250)
         self.throttle_pub.publish(0)
-        self.steer_pub.publish(127)
+        # self.steer_pub.publish(127)
         time.sleep(0.1)
 
     def ena_callback(self, data):

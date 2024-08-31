@@ -79,7 +79,7 @@ class bag_converter:
     def save(self):
         print('Saving...')
 
-        save_fpath = self.fpath[:-8]+'_np'
+        save_fpath = self.fpath[:-4]+'_np'
         print(self.fpath)
         # Write to file
         outfile = open(save_fpath,'wb')           # Fastest 57s 4300MB
